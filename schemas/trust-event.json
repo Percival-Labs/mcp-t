@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Percival-Labs/mcp-t/schemas/trust-event.json",
+  "title": "MCP-T Trust Event",
+  "type": "object",
+  "required": ["event_id", "event_type", "subject_id", "issuer_id", "timestamp", "payload", "signature"],
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Globally unique event identifier (ULID or UUIDv7 recommended)."
+    },
+    "event_type": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*(\\.[a-z][a-z0-9_]*)*$",
+      "description": "Dot-namespaced event type."
+    },
+    "subject_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "issuer_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "payload": {
+      "type": "object",
+      "description": "Event-type-specific data."
+    },
+    "dimensions_affected": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Trust dimensions this event is relevant to."
+    },
+    "signature": {
+      "$ref": "trust-score.json#/$defs/Signature"
+    },
+    "co_signatures": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["signer_id", "algorithm", "public_key", "value"],
+        "properties": {
+          "signer_id": { "type": "string" },
+          "algorithm": { "type": "string", "enum": ["Ed25519", "ES256", "ES384"] },
+          "public_key": { "type": "string" },
+          "value": { "type": "string" }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Percival-Labs/mcp-t/schemas/trust-score.json",
+  "title": "MCP-T Trust Score",
+  "type": "object",
+  "required": ["schema_version", "subject_id", "provider_id", "score", "validity", "signature"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "MCP-T schema version (semver)."
+    },
+    "subject_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The Trust Subject identifier (DID, npub, URI, or MCP server ID)."
+    },
+    "provider_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The Trust Provider identifier."
+    },
+    "score": {
+      "$ref": "#/$defs/TrustScoreValue"
+    },
+    "domain": {
+      "type": "string",
+      "description": "Domain scope. Omit for domain-general scores."
+    },
+    "domain_match": {
+      "type": "boolean",
+      "description": "Whether the provider had sufficient domain-specific data."
+    },
+    "validity": {
+      "$ref": "#/$defs/ValidityWindow"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Provider-specific metadata."
+    },
+    "authorized": {
+      "type": "boolean",
+      "description": "Whether the subject authorized this provider to publish scores."
+    },
+    "signature": {
+      "$ref": "#/$defs/Signature"
+    }
+  },
+  "$defs": {
+    "TrustScoreValue": {
+      "type": "object",
+      "required": ["composite", "dimensions"],
+      "properties": {
+        "composite": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000,
+          "description": "Composite trust score."
+        },
+        "dimensions": {
+          "type": "object",
+          "minProperties": 2,
+          "additionalProperties": {
+            "$ref": "#/$defs/DimensionScore"
+          },
+          "description": "Map of dimension IDs to scores."
+        }
+      }
+    },
+    "DimensionScore": {
+      "type": "object",
+      "required": ["value", "confidence", "evidence_count"],
+      "properties": {
+        "value": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000,
+          "description": "Dimensional score."
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "description": "Statistical reliability of this score."
+        },
+        "evidence_count": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of contributing Trust Events."
+        }
+      }
+    },
+    "ValidityWindow": {
+      "type": "object",
+      "required": ["issued_at", "expires_at", "max_age_seconds"],
+      "properties": {
+        "issued_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "expires_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "max_age_seconds": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "Signature": {
+      "type": "object",
+      "required": ["algorithm", "public_key", "value"],
+      "properties": {
+        "algorithm": {
+          "type": "string",
+          "enum": ["Ed25519", "ES256", "ES384"]
+        },
+        "public_key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

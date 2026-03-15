@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Percival-Labs/mcp-t/schemas/threshold-spec.json",
+  "title": "MCP-T Threshold Specification",
+  "type": "object",
+  "anyOf": [
+    { "required": ["composite_min"] },
+    { "required": ["dimension_mins"] }
+  ],
+  "properties": {
+    "composite_min": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000,
+      "description": "Minimum required composite score."
+    },
+    "dimension_mins": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 1000
+      },
+      "description": "Minimum required score per dimension."
+    },
+    "confidence_min": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "description": "Minimum required confidence level."
+    },
+    "min_evidence_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Minimum total evidence count."
+    }
+  }
+}

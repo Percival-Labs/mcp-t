@@ -1,0 +1,40 @@
+{
+  "description": "Check if an agent is trusted for code execution (composite >= 600, verification >= 800)",
+  "request": {
+    "jsonrpc": "2.0",
+    "id": "1",
+    "method": "trust/verify",
+    "params": {
+      "subject_id": "did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK",
+      "domain": "code-execution",
+      "threshold": {
+        "composite_min": 600,
+        "dimension_mins": {
+          "verification": 800
+        }
+      }
+    }
+  },
+  "response": {
+    "jsonrpc": "2.0",
+    "id": "1",
+    "result": {
+      "verified": true,
+      "subject_id": "did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK",
+      "provider_id": "did:web:vouch.percival-labs.ai",
+      "threshold_results": {
+        "composite_min": { "required": 600, "met": true },
+        "dimension_mins": {
+          "verification": { "required": 800, "met": true }
+        }
+      },
+      "confidence": 0.85,
+      "checked_at": "2026-03-15T10:31:00Z",
+      "signature": {
+        "algorithm": "Ed25519",
+        "public_key": "z6MkrHKy02OJz2FpaMohCstPqHSyBfShVJBaByLktb5GJbKH",
+        "value": "8RnKbP8RqG4VWxhFzKm..."
+      }
+    }
+  }
+}
