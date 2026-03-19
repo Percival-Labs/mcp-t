@@ -87,6 +87,11 @@
           "type": "integer",
           "minimum": 0,
           "description": "Number of contributing Trust Events."
+        },
+        "observation_window_seconds": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Duration (in seconds) of the observation window over which the contributing Trust Events were collected. Enables consumers to distinguish a score derived from 892 events over 3 years vs. 892 events over 24 hours, and to apply time-decay or recency requirements. OPTIONAL; omit when the window is unbounded or unknown."
         }
       }
     },
