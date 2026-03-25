@@ -1,0 +1,38 @@
+{
+  "description": "UCP commerce trust verification request - checkout threshold with behavioral fidelity",
+  "request": {
+    "jsonrpc": "2.0",
+    "id": "verify-checkout-001",
+    "method": "trust/verify",
+    "params": {
+      "subject_id": "did:key:z6MkExampleShoppingAgent",
+      "domain": "financial",
+      "threshold": {
+        "composite_min": 600,
+        "dimension_mins": {
+          "verification": 500,
+          "behavioral_fidelity": 700
+        },
+        "confidence_min": 0.5,
+        "min_evidence_count": 10
+      },
+      "nonce": "checkout-session-abc123"
+    }
+  },
+  "expected_response": {
+    "jsonrpc": "2.0",
+    "id": "verify-checkout-001",
+    "result": {
+      "verified": true,
+      "subject_id": "did:key:z6MkExampleShoppingAgent",
+      "nonce": "checkout-session-abc123",
+      "threshold_results": {
+        "composite_min": { "required": 600, "met": true },
+        "dimension_mins": {
+          "verification": { "required": 500, "met": true },
+          "behavioral_fidelity": { "required": 700, "met": true }
+        }
+      }
+    }
+  }
+}

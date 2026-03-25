@@ -1,0 +1,30 @@
+{
+  "schema_version": "0.1.0",
+  "subject_id": "npub1abc123",
+  "provider_id": "did:web:minimal.example.com",
+  "score": {
+    "composite": 500,
+    "dimensions": {
+      "verification": {
+        "value": 500,
+        "confidence": 0.5,
+        "evidence_count": 3
+      },
+      "performance": {
+        "value": 500,
+        "confidence": 0.5,
+        "evidence_count": 7
+      }
+    }
+  },
+  "validity": {
+    "issued_at": "2026-03-15T10:30:00Z",
+    "expires_at": "2026-03-15T11:30:00Z",
+    "max_age_seconds": 3600
+  },
+  "signature": {
+    "algorithm": "Ed25519",
+    "public_key": "z6MkrHKy02OJz2FpaMohCstPqHSyBfShVJBaByLktb5GJbKH",
+    "value": "abc123signature"
+  }
+}

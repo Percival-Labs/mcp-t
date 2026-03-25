@@ -1,0 +1,63 @@
+{
+  "event_id": "evt_01JTRACE001",
+  "event_type": "behavior.trace",
+  "subject_id": "did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK",
+  "issuer_id": "did:web:platform.example.com",
+  "timestamp": "2026-03-23T09:45:00Z",
+  "payload": {
+    "trace_id": "trc_01JABC789XYZ",
+    "contract_id": "ctr_98765",
+    "tool_calls": [
+      {
+        "tool_name": "file_read",
+        "arguments_hash": "sha256:abc123",
+        "timestamp": "2026-03-23T09:45:01Z",
+        "duration_ms": 45,
+        "result_hash": "sha256:def456",
+        "declared": true
+      },
+      {
+        "tool_name": "http_request",
+        "arguments_hash": "sha256:ghi789",
+        "timestamp": "2026-03-23T09:45:02Z",
+        "duration_ms": 230,
+        "result_hash": "sha256:jkl012",
+        "declared": false
+      }
+    ],
+    "resources_accessed": [
+      {
+        "resource_type": "file",
+        "resource_id": "/data/input.csv",
+        "access_type": "read",
+        "declared": true
+      },
+      {
+        "resource_type": "network",
+        "resource_id": "api.external-service.com:443",
+        "access_type": "write",
+        "declared": false
+      }
+    ],
+    "side_effects": [
+      {
+        "type": "file_write",
+        "target": "/data/output.json",
+        "declared": true
+      }
+    ],
+    "duration_ms": 3420,
+    "peak_memory_bytes": 134217728,
+    "total_tool_calls": 2,
+    "undeclared_tool_calls": 1,
+    "total_resources": 2,
+    "undeclared_resources": 1,
+    "fidelity_ratio": 0.50
+  },
+  "dimensions_affected": ["behavioral_fidelity", "performance", "consistency"],
+  "signature": {
+    "algorithm": "Ed25519",
+    "public_key": "z6MkrHKy02OJz2FpaMohCstPqHSyBfShVJBaByLktb5GJbKH",
+    "value": "9TrKbP8RqG4VWxhFzKm"
+  }
+}

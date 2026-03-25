@@ -1,0 +1,20 @@
+{
+  "name": "@mcp-t/conformance",
+  "version": "0.1.0",
+  "description": "Conformance testing suite for MCP-T specification v0.1.0",
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "@noble/ed25519": "^2.2.3",
+    "canonicalize": "^2.0.0",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.0"
+  },
+  "license": "Apache-2.0"
+}

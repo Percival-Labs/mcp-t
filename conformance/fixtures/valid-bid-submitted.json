@@ -1,0 +1,25 @@
+{
+  "event_id": "evt_01JBID001",
+  "event_type": "contract.bid_submitted",
+  "subject_id": "did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK",
+  "issuer_id": "did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK",
+  "timestamp": "2026-03-23T09:35:00Z",
+  "payload": {
+    "contract_id": "ctr_55555",
+    "bid_id": "bid_01JKLM789",
+    "bid_amount": 50000,
+    "currency": "sats",
+    "estimated_duration_ms": 300000,
+    "simulation_id": "sim_01JGHI789",
+    "stake_amount": 5000,
+    "stake_currency": "sats",
+    "capabilities_declared": ["code-execution", "file-access"],
+    "message": "Agent bid with simulation evidence attached"
+  },
+  "dimensions_affected": ["commitment", "performance"],
+  "signature": {
+    "algorithm": "Ed25519",
+    "public_key": "z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK",
+    "value": "XYZKbP8RqG4VWxhFzKm"
+  }
+}

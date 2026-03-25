@@ -8,6 +8,8 @@ MCP-I = Who the agent is
 MCP-T = Should you trust it
 ```
 
+MCP-T works anywhere agents operate: MCP tool servers, [UCP](https://shopify.engineering/ucp) agentic commerce, and any protocol where trust decisions gate access to resources.
+
 ## The Problem
 
 AI agents can connect to 10,000+ tools via MCP. None of those tools have trust scores. An agent's demonstrated trustworthiness on one platform carries no weight on another. Platforms must independently solve trust evaluation — or skip it entirely.
@@ -16,7 +18,7 @@ The result: [824 malicious skills](https://snyk.io/blog/toxicskills-malicious-ai
 
 ## What MCP-T Defines
 
-1. **Trust Score Schema** — Nine default dimensions across economic, behavioral, security, and governance domains. 0-1000 range, confidence metadata, domain scoping, temporal validity. Implementations score at least two; custom dimensions extend via reverse-DNS namespacing.
+1. **Trust Score Schema** — Ten default dimensions across economic, behavioral, security, and governance domains. 0-1000 range, confidence metadata, domain scoping, temporal validity. Implementations score at least two; custom dimensions extend via reverse-DNS namespacing.
 
    | Dimension | What It Measures |
    |-----------|-----------------|
@@ -29,6 +31,7 @@ The result: [824 malicious skills](https://snyk.io/blog/toxicskills-malicious-ai
    | `transparency` | Openness to inspection and audit |
    | `compliance` | Regulatory and policy adherence |
    | `security` | Vulnerability posture and incident response |
+   | `behavioral_fidelity` | Declared vs. observed behavior honesty *(v0.2.0)* |
 
 2. **Query Protocol** — Five JSON-RPC 2.0 methods aligned with MCP:
    - `trust/query` — Full trust score retrieval
@@ -37,7 +40,7 @@ The result: [824 malicious skills](https://snyk.io/blog/toxicskills-malicious-ai
    - `trust/providers` — Discover available trust providers
    - `trust/publish` — Report trust-relevant observations
 
-3. **Trust Event Format** — Signed, timestamped records of trust-relevant observations (contract completions, security incidents, behavioral anomalies). Transport-agnostic.
+3. **Trust Event Format** — Signed, timestamped records of trust-relevant observations (contract completions, security incidents, behavioral traces, simulation results, bid lifecycle). 26 standard event types across 8 categories. Transport-agnostic.
 
 4. **Trust Provider Interface** — Registration, discovery, authorization, and multi-provider aggregation.
 
@@ -97,13 +100,32 @@ MCP-T is transport-agnostic. The spec defines bindings for:
 - **Composable** — Works alongside MCP and MCP-I. Not required, but stronger together.
 - **Portable** — Trust data flows through any transport. No vendor lock-in.
 - **Privacy-aware** — Supports zero-knowledge trust proofs (Level 3).
-- **Extensible** — Nine default dimensions plus unlimited custom dimensions via reverse-DNS namespacing.
+- **Extensible** — Ten default dimensions plus unlimited custom dimensions via reverse-DNS namespacing.
+- **Observable** — First-class behavioral tracing, simulation, and declared-vs-observed comparison *(v0.2.0)*.
 
 ## Specification
 
-The full specification is at [`spec/mcp-t-v0.1.0.md`](spec/mcp-t-v0.1.0.md).
+**Current:** [`spec/mcp-t-v0.2.0.md`](spec/mcp-t-v0.2.0.md) (v0.2.0-draft, 2026-03-23)
+**Previous:** [`spec/mcp-t-v0.1.0.md`](spec/mcp-t-v0.1.0.md) (v0.1.0-draft, 2026-03-15)
 
 JSON schemas for all data structures are in [`schemas/`](schemas/).
+
+### What's New in v0.2.0
+
+- **Behavioral Fidelity** dimension -- measures whether agents do what they say they do
+- **Behavioral Observation Events** -- structured runtime traces with fidelity ratios, invariant discovery, declaration deltas
+- **Simulation Events** -- pre-execution predictions, post-execution accuracy measurement
+- **Bid Events** -- contract bidding lifecycle with optional simulation evidence
+- **Scoring Methodology Guidance** -- two-tier architecture (structural + contextual pass) as recommended pattern
+- Full backward compatibility with v0.1.0
+
+## Integration Guides
+
+| Protocol | Guide | Status |
+|----------|-------|--------|
+| **UCP** (Shopify + Google) | [`docs/integrations/ucp-integration.md`](docs/integrations/ucp-integration.md) | Complete |
+
+MCP-T integrates with UCP's agentic commerce protocol to provide trust-tiered checkout flows. Merchants set trust thresholds in their `/.well-known/ucp` profile. Agents that meet the threshold proceed autonomously. Agents below the threshold trigger UCP's `requires_escalation` state for human approval.
 
 ## Implementations
 
@@ -117,7 +139,7 @@ JSON schemas for all data structures are in [`schemas/`](schemas/).
 
 MCP-T is an open specification. Contributions are welcome.
 
-- **Spec changes**: Open an issue or PR against `spec/mcp-t-v0.1.0.md`
+- **Spec changes**: Open an issue or PR against `spec/mcp-t-v0.2.0.md`
 - **New transport bindings**: Propose in a GitHub issue
 - **New default dimensions**: Propose via RFC issue
 - **Implementations**: Add to the table above via PR

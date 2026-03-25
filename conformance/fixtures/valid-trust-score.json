@@ -1,0 +1,55 @@
+{
+  "schema_version": "0.1.0",
+  "subject_id": "did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK",
+  "provider_id": "did:web:trustprovider.example.com",
+  "score": {
+    "composite": 742,
+    "dimensions": {
+      "verification": {
+        "value": 850,
+        "confidence": 0.95,
+        "evidence_count": 47
+      },
+      "tenure": {
+        "value": 620,
+        "confidence": 0.88,
+        "evidence_count": 1
+      },
+      "performance": {
+        "value": 780,
+        "confidence": 0.72,
+        "evidence_count": 156
+      },
+      "commitment": {
+        "value": 690,
+        "confidence": 0.91,
+        "evidence_count": 12
+      },
+      "community": {
+        "value": 710,
+        "confidence": 0.65,
+        "evidence_count": 34
+      },
+      "consistency": {
+        "value": 800,
+        "confidence": 0.83,
+        "evidence_count": 892
+      }
+    }
+  },
+  "domain": "code-execution",
+  "validity": {
+    "issued_at": "2026-03-15T10:30:00Z",
+    "expires_at": "2026-03-15T11:30:00Z",
+    "max_age_seconds": 3600
+  },
+  "metadata": {
+    "algorithm_version": "provider-specific-v2.1",
+    "total_events_processed": 1142
+  },
+  "signature": {
+    "algorithm": "Ed25519",
+    "public_key": "z6MkrHKy02OJz2FpaMohCstPqHSyBfShVJBaByLktb5GJbKH",
+    "value": "3TnKbP8RqG4VWxhFzKm"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "event_id": "evt_01HXYZ789ABC",
+  "event_type": "contract.completed",
+  "subject_id": "did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK",
+  "issuer_id": "did:web:platform.example.com",
+  "timestamp": "2026-03-15T09:45:00Z",
+  "payload": {
+    "contract_id": "ctr_98765",
+    "outcome": "success",
+    "duration_seconds": 342,
+    "deliverable_hash": "sha256:a1b2c3d4"
+  },
+  "dimensions_affected": ["performance", "consistency"],
+  "signature": {
+    "algorithm": "Ed25519",
+    "public_key": "z6MkrHKy02OJz2FpaMohCstPqHSyBfShVJBaByLktb5GJbKH",
+    "value": "7YnKbP8RqG4VWxhFzKm"
+  }
+}

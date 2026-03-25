@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Percival-Labs/mcp-t/schemas/behavioral-trace.json",
+  "title": "MCP-T Behavioral Trace Payload",
+  "description": "Schema for the payload of behavior.trace trust events (v0.2.0).",
+  "type": "object",
+  "required": [
+    "trace_id",
+    "tool_calls",
+    "resources_accessed",
+    "duration_ms",
+    "total_tool_calls",
+    "undeclared_tool_calls",
+    "total_resources",
+    "undeclared_resources"
+  ],
+  "properties": {
+    "trace_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Unique identifier for this behavioral trace."
+    },
+    "contract_id": {
+      "type": "string",
+      "description": "The contract this trace is associated with, if applicable."
+    },
+    "tool_calls": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/ToolCallRecord" },
+      "description": "Ordered list of tool invocations observed during execution."
+    },
+    "resources_accessed": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/ResourceAccessRecord" },
+      "description": "List of resources the agent accessed during execution."
+    },
+    "side_effects": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/SideEffectRecord" },
+      "description": "List of side effects produced by the agent beyond its stated output."
+    },
+    "duration_ms": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Total execution duration in milliseconds."
+    },
+    "peak_memory_bytes": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Peak memory consumption during execution."
+    },
+    "total_tool_calls": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Total number of tool calls made."
+    },
+    "undeclared_tool_calls": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of tool calls not in the agent's declared capability set."
+    },
+    "total_resources": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Total number of resources accessed."
+    },
+    "undeclared_resources": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of resources not in the agent's declared access list."
+    },
+    "fidelity_ratio": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "description": "Ratio of declared-to-total actions: (total - undeclared) / total. 1.0 = perfect fidelity."
+    }
+  },
+  "$defs": {
+    "ToolCallRecord": {
+      "type": "object",
+      "required": ["tool_name", "timestamp", "duration_ms", "declared"],
+      "properties": {
+        "tool_name": {
+          "type": "string",
+          "description": "Name of the tool invoked."
+        },
+        "arguments_hash": {
+          "type": "string",
+          "description": "Hash of the call arguments (for privacy)."
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the tool call was made."
+        },
+        "duration_ms": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Duration of the tool call."
+        },
+        "result_hash": {
+          "type": "string",
+          "description": "Hash of the tool call result."
+        },
+        "declared": {
+          "type": "boolean",
+          "description": "Whether this tool call was within the agent's declared capabilities."
+        }
+      }
+    },
+    "ResourceAccessRecord": {
+      "type": "object",
+      "required": ["resource_type", "resource_id", "access_type", "declared"],
+      "properties": {
+        "resource_type": {
+          "type": "string",
+          "enum": ["file", "network", "database", "api", "memory", "system"],
+          "description": "Type of resource."
+        },
+        "resource_id": {
+          "type": "string",
+          "description": "Identifier of the resource accessed."
+        },
+        "access_type": {
+          "type": "string",
+          "enum": ["read", "write", "execute", "delete"],
+          "description": "Nature of access."
+        },
+        "declared": {
+          "type": "boolean",
+          "description": "Whether this resource access was within the agent's declared scope."
+        }
+      }
+    },
+    "SideEffectRecord": {
+      "type": "object",
+      "required": ["type", "target", "declared"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["file_write", "network_request", "state_mutation", "notification", "other"],
+          "description": "Type of side effect."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the side effect."
+        },
+        "declared": {
+          "type": "boolean",
+          "description": "Whether this side effect was within the agent's declared output scope."
+        }
+      }
+    }
+  }
+}

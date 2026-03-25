@@ -1,0 +1,30 @@
+{
+  "schema_version": "0.1.0",
+  "subject_id": "did:key:z6MkBoundaryTest",
+  "provider_id": "did:web:boundary.example.com",
+  "score": {
+    "composite": 0,
+    "dimensions": {
+      "verification": {
+        "value": 0,
+        "confidence": 0.0,
+        "evidence_count": 0
+      },
+      "tenure": {
+        "value": 1000,
+        "confidence": 1.0,
+        "evidence_count": 999999
+      }
+    }
+  },
+  "validity": {
+    "issued_at": "2026-03-15T10:30:00Z",
+    "expires_at": "2026-03-15T11:30:00Z",
+    "max_age_seconds": 1
+  },
+  "signature": {
+    "algorithm": "ES256",
+    "public_key": "boundary-key",
+    "value": "boundary-sig"
+  }
+}

@@ -1,0 +1,162 @@
+{
+  "contract_completed": {
+    "event_id": "evt_01HXYZ001",
+    "event_type": "contract.completed",
+    "subject_id": "did:key:z6MkTest",
+    "issuer_id": "did:web:platform.example.com",
+    "timestamp": "2026-03-15T09:00:00Z",
+    "payload": { "contract_id": "ctr_001", "outcome": "success" },
+    "dimensions_affected": ["performance", "consistency"],
+    "signature": { "algorithm": "Ed25519", "public_key": "testkey", "value": "testsig" }
+  },
+  "contract_failed": {
+    "event_id": "evt_01HXYZ002",
+    "event_type": "contract.failed",
+    "subject_id": "did:key:z6MkTest",
+    "issuer_id": "did:web:platform.example.com",
+    "timestamp": "2026-03-15T09:01:00Z",
+    "payload": { "contract_id": "ctr_002", "outcome": "failure", "reason": "timeout" },
+    "dimensions_affected": ["performance"],
+    "signature": { "algorithm": "Ed25519", "public_key": "testkey", "value": "testsig" }
+  },
+  "contract_disputed": {
+    "event_id": "evt_01HXYZ003",
+    "event_type": "contract.disputed",
+    "subject_id": "did:key:z6MkTest",
+    "issuer_id": "did:web:platform.example.com",
+    "timestamp": "2026-03-15T09:02:00Z",
+    "payload": { "contract_id": "ctr_003", "dispute_reason": "output mismatch" },
+    "dimensions_affected": ["performance", "consistency"],
+    "signature": { "algorithm": "Ed25519", "public_key": "testkey", "value": "testsig" }
+  },
+  "contract_abandoned": {
+    "event_id": "evt_01HXYZ004",
+    "event_type": "contract.abandoned",
+    "subject_id": "did:key:z6MkTest",
+    "issuer_id": "did:web:platform.example.com",
+    "timestamp": "2026-03-15T09:03:00Z",
+    "payload": { "contract_id": "ctr_004", "abandonment_reason": "agent offline" },
+    "dimensions_affected": ["performance", "commitment"],
+    "signature": { "algorithm": "Ed25519", "public_key": "testkey", "value": "testsig" }
+  },
+  "security_incident": {
+    "event_id": "evt_01HXYZ005",
+    "event_type": "security.incident",
+    "subject_id": "did:key:z6MkTest",
+    "issuer_id": "did:web:platform.example.com",
+    "timestamp": "2026-03-15T09:04:00Z",
+    "payload": { "severity": "high", "description": "Unauthorized data access attempt" },
+    "dimensions_affected": ["security"],
+    "signature": { "algorithm": "Ed25519", "public_key": "testkey", "value": "testsig" }
+  },
+  "security_vulnerability_reported": {
+    "event_id": "evt_01HXYZ006",
+    "event_type": "security.vulnerability_reported",
+    "subject_id": "did:key:z6MkTest",
+    "issuer_id": "did:web:platform.example.com",
+    "timestamp": "2026-03-15T09:05:00Z",
+    "payload": { "severity": "critical", "reported_by": "did:key:z6MkReporter" },
+    "dimensions_affected": ["security"],
+    "signature": { "algorithm": "Ed25519", "public_key": "testkey", "value": "testsig" }
+  },
+  "security_vulnerability_resolved": {
+    "event_id": "evt_01HXYZ007",
+    "event_type": "security.vulnerability_resolved",
+    "subject_id": "did:key:z6MkTest",
+    "issuer_id": "did:web:platform.example.com",
+    "timestamp": "2026-03-15T09:06:00Z",
+    "payload": { "resolution_time_seconds": 7200 },
+    "dimensions_affected": ["security"],
+    "signature": { "algorithm": "Ed25519", "public_key": "testkey", "value": "testsig" }
+  },
+  "security_audit_completed": {
+    "event_id": "evt_01HXYZ008",
+    "event_type": "security.audit_completed",
+    "subject_id": "did:key:z6MkTest",
+    "issuer_id": "did:web:platform.example.com",
+    "timestamp": "2026-03-15T09:07:00Z",
+    "payload": { "auditor_id": "did:web:auditor.example.com", "findings_count": 3, "critical_findings": 0 },
+    "dimensions_affected": ["security", "compliance"],
+    "signature": { "algorithm": "Ed25519", "public_key": "testkey", "value": "testsig" }
+  },
+  "behavior_anomaly": {
+    "event_id": "evt_01HXYZ009",
+    "event_type": "behavior.anomaly",
+    "subject_id": "did:key:z6MkTest",
+    "issuer_id": "did:web:platform.example.com",
+    "timestamp": "2026-03-15T09:08:00Z",
+    "payload": { "anomaly_type": "output_drift", "evidence": "Response pattern deviation >3 sigma" },
+    "dimensions_affected": ["consistency"],
+    "signature": { "algorithm": "Ed25519", "public_key": "testkey", "value": "testsig" }
+  },
+  "behavior_definition_change": {
+    "event_id": "evt_01HXYZ010",
+    "event_type": "behavior.definition_change",
+    "subject_id": "did:key:z6MkTest",
+    "issuer_id": "did:web:platform.example.com",
+    "timestamp": "2026-03-15T09:09:00Z",
+    "payload": { "tool_name": "code-review", "diff": { "before": "v1.0", "after": "v1.1" } },
+    "dimensions_affected": ["consistency", "transparency"],
+    "signature": { "algorithm": "Ed25519", "public_key": "testkey", "value": "testsig" }
+  },
+  "behavior_uptime_report": {
+    "event_id": "evt_01HXYZ011",
+    "event_type": "behavior.uptime_report",
+    "subject_id": "did:key:z6MkTest",
+    "issuer_id": "did:web:platform.example.com",
+    "timestamp": "2026-03-15T09:10:00Z",
+    "payload": { "period_seconds": 86400, "availability_ratio": 0.997 },
+    "dimensions_affected": ["consistency", "performance"],
+    "signature": { "algorithm": "Ed25519", "public_key": "testkey", "value": "testsig" }
+  },
+  "endorsement_vouch": {
+    "event_id": "evt_01HXYZ012",
+    "event_type": "endorsement.vouch",
+    "subject_id": "did:key:z6MkTest",
+    "issuer_id": "did:web:endorser.example.com",
+    "timestamp": "2026-03-15T09:11:00Z",
+    "payload": { "endorser_trust_score": 850, "domain": "code-execution" },
+    "dimensions_affected": ["community"],
+    "signature": { "algorithm": "Ed25519", "public_key": "testkey", "value": "testsig" }
+  },
+  "endorsement_revoke": {
+    "event_id": "evt_01HXYZ013",
+    "event_type": "endorsement.revoke",
+    "subject_id": "did:key:z6MkTest",
+    "issuer_id": "did:web:endorser.example.com",
+    "timestamp": "2026-03-15T09:12:00Z",
+    "payload": { "original_event_id": "evt_01HXYZ012" },
+    "dimensions_affected": ["community"],
+    "signature": { "algorithm": "Ed25519", "public_key": "testkey", "value": "testsig" }
+  },
+  "economic_stake_deposited": {
+    "event_id": "evt_01HXYZ014",
+    "event_type": "economic.stake_deposited",
+    "subject_id": "did:key:z6MkTest",
+    "issuer_id": "did:web:staking.example.com",
+    "timestamp": "2026-03-15T09:13:00Z",
+    "payload": { "amount": 100000, "currency": "sats", "lock_duration_seconds": 2592000 },
+    "dimensions_affected": ["commitment"],
+    "signature": { "algorithm": "Ed25519", "public_key": "testkey", "value": "testsig" }
+  },
+  "economic_stake_withdrawn": {
+    "event_id": "evt_01HXYZ015",
+    "event_type": "economic.stake_withdrawn",
+    "subject_id": "did:key:z6MkTest",
+    "issuer_id": "did:web:staking.example.com",
+    "timestamp": "2026-03-15T09:14:00Z",
+    "payload": { "amount": 50000, "currency": "sats" },
+    "dimensions_affected": ["commitment"],
+    "signature": { "algorithm": "Ed25519", "public_key": "testkey", "value": "testsig" }
+  },
+  "economic_slash_executed": {
+    "event_id": "evt_01HXYZ016",
+    "event_type": "economic.slash_executed",
+    "subject_id": "did:key:z6MkTest",
+    "issuer_id": "did:web:staking.example.com",
+    "timestamp": "2026-03-15T09:15:00Z",
+    "payload": { "amount": 10000, "currency": "sats", "reason": "SLA violation", "adjudication_id": "adj_001" },
+    "dimensions_affected": ["commitment", "performance"],
+    "signature": { "algorithm": "Ed25519", "public_key": "testkey", "value": "testsig" }
+  }
+}

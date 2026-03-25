@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Percival-Labs/mcp-t/schemas/simulation-result.json",
+  "title": "MCP-T Simulation Result Payload",
+  "description": "Schema for the payload of simulation.result trust events (v0.2.0).",
+  "type": "object",
+  "required": ["simulation_id", "predicted_outcome", "confidence"],
+  "properties": {
+    "simulation_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Reference to the simulation run."
+    },
+    "predicted_outcome": {
+      "type": "string",
+      "enum": ["success", "partial_success", "failure", "timeout", "indeterminate"],
+      "description": "Predicted task outcome."
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "description": "Confidence in the prediction."
+    },
+    "predicted_duration_ms": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Predicted execution duration."
+    },
+    "predicted_tool_calls": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Tools the agent is predicted to use."
+    },
+    "predicted_resources": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Resources the agent is predicted to access."
+    },
+    "predicted_side_effects": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Side effects the agent is predicted to produce."
+    },
+    "risk_flags": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/RiskFlag" },
+      "description": "Potential behavioral risks identified by the simulation."
+    },
+    "comparable_task_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of historical tasks used as basis for the prediction."
+    }
+  },
+  "$defs": {
+    "RiskFlag": {
+      "type": "object",
+      "required": ["flag", "probability", "evidence"],
+      "properties": {
+        "flag": {
+          "type": "string",
+          "description": "Identifier for the risk."
+        },
+        "probability": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "description": "Estimated probability of this risk materializing."
+        },
+        "evidence": {
+          "type": "string",
+          "description": "Human-readable explanation of why this risk was flagged."
+        }
+      }
+    }
+  }
+}

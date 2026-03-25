@@ -1,0 +1,30 @@
+{
+  "event_id": "evt_01JSIMRES001",
+  "event_type": "simulation.result",
+  "subject_id": "did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK",
+  "issuer_id": "did:web:simulator.example.com",
+  "timestamp": "2026-03-23T09:30:00Z",
+  "payload": {
+    "simulation_id": "sim_01JGHI789",
+    "predicted_outcome": "success",
+    "confidence": 0.87,
+    "predicted_duration_ms": 4500,
+    "predicted_tool_calls": ["file_read", "file_write", "json_parse"],
+    "predicted_resources": ["file:/data/input.csv", "file:/data/output.json"],
+    "predicted_side_effects": ["file_write:/data/output.json"],
+    "risk_flags": [
+      {
+        "flag": "network_access_possible",
+        "probability": 0.12,
+        "evidence": "Agent has used http_request in 12% of similar tasks"
+      }
+    ],
+    "comparable_task_count": 23
+  },
+  "dimensions_affected": ["behavioral_fidelity", "performance"],
+  "signature": {
+    "algorithm": "Ed25519",
+    "public_key": "z6MkrHKy02OJz2FpaMohCstPqHSyBfShVJBaByLktb5GJbKH",
+    "value": "ABcKbP8RqG4VWxhFzKm"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "composite_min": 700,
+  "dimension_mins": {
+    "verification": 800,
+    "commitment": 600
+  },
+  "confidence_min": 0.7,
+  "min_evidence_count": 10
+}

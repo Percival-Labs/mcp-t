@@ -1,0 +1,276 @@
+{
+  "trust_query": {
+    "request": {
+      "jsonrpc": "2.0",
+      "id": "req-001",
+      "method": "trust/query",
+      "params": {
+        "subject_id": "did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK",
+        "domain": "code-execution",
+        "provider_id": "did:web:trustprovider.example.com",
+        "max_age_seconds": 3600,
+        "dimensions": ["performance", "consistency", "verification"]
+      }
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": "req-001",
+      "result": {
+        "trust_score": {
+          "schema_version": "0.1.0",
+          "subject_id": "did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK",
+          "provider_id": "did:web:trustprovider.example.com",
+          "score": {
+            "composite": 742,
+            "dimensions": {
+              "verification": { "value": 850, "confidence": 0.95, "evidence_count": 47 },
+              "performance": { "value": 780, "confidence": 0.72, "evidence_count": 156 },
+              "consistency": { "value": 800, "confidence": 0.83, "evidence_count": 892 }
+            }
+          },
+          "domain": "code-execution",
+          "domain_match": true,
+          "validity": {
+            "issued_at": "2026-03-15T10:30:00Z",
+            "expires_at": "2026-03-15T11:30:00Z",
+            "max_age_seconds": 3600
+          },
+          "signature": {
+            "algorithm": "Ed25519",
+            "public_key": "z6MkrHKy02OJz2FpaMohCstPqHSyBfShVJBaByLktb5GJbKH",
+            "value": "3TnKbP8RqG4VWxhFzKm"
+          }
+        }
+      }
+    },
+    "error_subject_not_found": {
+      "jsonrpc": "2.0",
+      "id": "req-001",
+      "error": {
+        "code": -32001,
+        "message": "SubjectNotFound",
+        "data": { "subject_id": "did:key:z6MkUnknown" }
+      }
+    },
+    "error_provider_unavailable": {
+      "jsonrpc": "2.0",
+      "id": "req-001",
+      "error": {
+        "code": -32002,
+        "message": "ProviderUnavailable"
+      }
+    },
+    "error_domain_not_supported": {
+      "jsonrpc": "2.0",
+      "id": "req-001",
+      "error": {
+        "code": -32003,
+        "message": "DomainNotSupported",
+        "data": { "domain": "unknown-domain" }
+      }
+    },
+    "error_stale_score": {
+      "jsonrpc": "2.0",
+      "id": "req-001",
+      "error": {
+        "code": -32004,
+        "message": "StaleScore",
+        "data": {
+          "trust_score": {
+            "schema_version": "0.1.0",
+            "subject_id": "did:key:z6MkTest",
+            "provider_id": "did:web:provider.example.com",
+            "score": { "composite": 500, "dimensions": { "verification": { "value": 500, "confidence": 0.5, "evidence_count": 1 }, "performance": { "value": 500, "confidence": 0.5, "evidence_count": 1 } } },
+            "validity": { "issued_at": "2026-03-14T10:30:00Z", "expires_at": "2026-03-14T11:30:00Z", "max_age_seconds": 3600 },
+            "signature": { "algorithm": "Ed25519", "public_key": "key", "value": "sig" }
+          }
+        }
+      }
+    }
+  },
+  "trust_verify": {
+    "request": {
+      "jsonrpc": "2.0",
+      "id": "req-002",
+      "method": "trust/verify",
+      "params": {
+        "subject_id": "did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK",
+        "domain": "financial",
+        "threshold": {
+          "composite_min": 700,
+          "dimension_mins": {
+            "verification": 800,
+            "commitment": 600
+          }
+        },
+        "nonce": "a1b2c3d4e5f6",
+        "provider_id": "did:web:trustprovider.example.com"
+      }
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": "req-002",
+      "result": {
+        "verified": true,
+        "subject_id": "did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK",
+        "provider_id": "did:web:trustprovider.example.com",
+        "nonce": "a1b2c3d4e5f6",
+        "threshold_results": {
+          "composite_min": { "required": 700, "met": true },
+          "dimension_mins": {
+            "verification": { "required": 800, "met": true },
+            "commitment": { "required": 600, "met": true }
+          }
+        },
+        "confidence": 0.85,
+        "checked_at": "2026-03-15T10:31:00Z",
+        "valid_until": "2026-03-15T11:31:00Z",
+        "signature": {
+          "algorithm": "Ed25519",
+          "public_key": "z6MkrHKy02OJz2FpaMohCstPqHSyBfShVJBaByLktb5GJbKH",
+          "value": "8RnKbP8RqG4VWxhFzKm"
+        }
+      }
+    }
+  },
+  "trust_history": {
+    "request": {
+      "jsonrpc": "2.0",
+      "id": "req-003",
+      "method": "trust/history",
+      "params": {
+        "subject_id": "did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK",
+        "event_types": ["contract.completed", "contract.failed"],
+        "after": "2026-01-01T00:00:00Z",
+        "before": "2026-03-15T23:59:59Z",
+        "limit": 50,
+        "cursor": null
+      }
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": "req-003",
+      "result": {
+        "events": [
+          {
+            "event_id": "evt_01HXYZ789ABC",
+            "event_type": "contract.completed",
+            "subject_id": "did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK",
+            "issuer_id": "did:web:platform.example.com",
+            "timestamp": "2026-03-15T09:45:00Z",
+            "payload": { "contract_id": "ctr_98765", "outcome": "success" },
+            "dimensions_affected": ["performance", "consistency"],
+            "signature": { "algorithm": "Ed25519", "public_key": "key", "value": "sig" }
+          }
+        ],
+        "cursor": "eyJsYXN0X2lkIjoiZXZ0XzAxSFhZWjc4OUFCQyJ9",
+        "has_more": true,
+        "total_count": 1142
+      }
+    }
+  },
+  "trust_providers": {
+    "request": {
+      "jsonrpc": "2.0",
+      "id": "req-004",
+      "method": "trust/providers",
+      "params": {}
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": "req-004",
+      "result": {
+        "providers": [
+          {
+            "provider_id": "did:web:trustprovider.example.com",
+            "name": "Example Trust Service",
+            "description": "Behavioral and economic trust scoring for MCP agents.",
+            "endpoint": "https://api.trustprovider.example.com/mcp-t/v1",
+            "transport_bindings": ["https", "nostr"],
+            "conformance_level": 2,
+            "supported_domains": ["general", "code-execution", "financial"],
+            "dimensions": ["verification", "tenure", "performance", "commitment", "community", "consistency"],
+            "scoring_methodology_uri": "https://trustprovider.example.com/docs/scoring",
+            "public_key": "z6MkrHKy02OJz2FpaMohCstPqHSyBfShVJBaByLktb5GJbKH"
+          }
+        ]
+      }
+    }
+  },
+  "trust_publish": {
+    "request": {
+      "jsonrpc": "2.0",
+      "id": "req-005",
+      "method": "trust/publish",
+      "params": {
+        "event": {
+          "event_id": "evt_01HXYZ789DEF",
+          "event_type": "contract.completed",
+          "subject_id": "did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK",
+          "issuer_id": "did:web:platform.example.com",
+          "timestamp": "2026-03-15T12:00:00Z",
+          "payload": { "contract_id": "ctr_11111", "outcome": "success", "duration_seconds": 120 },
+          "dimensions_affected": ["performance"],
+          "signature": { "algorithm": "Ed25519", "public_key": "key", "value": "sig" }
+        }
+      }
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": "req-005",
+      "result": {
+        "accepted": true,
+        "event_id": "evt_01HXYZ789DEF",
+        "processing_status": "queued"
+      }
+    },
+    "error_invalid_signature": {
+      "jsonrpc": "2.0",
+      "id": "req-005",
+      "error": { "code": -32010, "message": "InvalidSignature" }
+    },
+    "error_unknown_event_type": {
+      "jsonrpc": "2.0",
+      "id": "req-005",
+      "error": { "code": -32011, "message": "UnknownEventType" }
+    },
+    "error_duplicate_event": {
+      "jsonrpc": "2.0",
+      "id": "req-005",
+      "error": { "code": -32012, "message": "DuplicateEvent" }
+    },
+    "error_issuer_not_authorized": {
+      "jsonrpc": "2.0",
+      "id": "req-005",
+      "error": { "code": -32013, "message": "IssuerNotAuthorized" }
+    }
+  },
+  "common_errors": {
+    "rate_limited": {
+      "jsonrpc": "2.0",
+      "id": "req-001",
+      "error": {
+        "code": -32020,
+        "message": "RateLimited",
+        "data": { "retry_after_seconds": 30 }
+      }
+    },
+    "unsupported_version": {
+      "jsonrpc": "2.0",
+      "id": "req-001",
+      "error": {
+        "code": -32021,
+        "message": "UnsupportedVersion",
+        "data": { "supported_versions": ["0.1.0"] }
+      }
+    },
+    "key_binding_failed": {
+      "jsonrpc": "2.0",
+      "id": "req-001",
+      "error": {
+        "code": -32022,
+        "message": "KeyBindingFailed"
+      }
+    }
+  }
+}
