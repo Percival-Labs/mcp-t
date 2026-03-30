@@ -222,7 +222,8 @@ A Trust Score is the primary data structure in MCP-T. It represents the trust ev
       "consistency": {
         "value": 800,
         "confidence": 0.83,
-        "evidence_count": 892
+        "evidence_count": 892,
+        "observation_window_seconds": 2592000
       }
     }
   },
@@ -274,6 +275,7 @@ A Trust Score is the primary data structure in MCP-T. It represents the trust ev
 | `value` | integer | REQUIRED | Dimensional score. MUST be in the range [0, 1000]. |
 | `confidence` | number | REQUIRED | Confidence level. MUST be in the range [0.0, 1.0]. Represents the statistical reliability of this dimensional score based on evidence quantity and quality. |
 | `evidence_count` | integer | REQUIRED | The number of Trust Events that contributed to this dimensional score. MUST be >= 0. |
+| `observation_window_seconds` | integer | OPTIONAL | The duration in seconds of the observation window over which the contributing Trust Events were collected. For example, `86400` indicates the score reflects the most recent 24 hours of evidence. When omitted, the window is unbounded or unknown. Consumers SHOULD use this field to apply recency requirements (e.g., reject scores computed over windows shorter than a minimum threshold). |
 
 #### 4.2.4 ValidityWindow
 
@@ -1536,6 +1538,11 @@ This specification does not define new media types. All messages use `applicatio
           "type": "integer",
           "minimum": 0,
           "description": "Number of contributing Trust Events."
+        },
+        "observation_window_seconds": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Duration (in seconds) of the observation window over which the contributing Trust Events were collected. Enables consumers to distinguish a score derived from 892 events over 3 years vs. 892 events over 24 hours, and to apply time-decay or recency requirements. OPTIONAL; omit when the window is unbounded or unknown."
         }
       }
     },
